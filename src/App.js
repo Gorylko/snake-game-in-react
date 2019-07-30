@@ -3,16 +3,6 @@ import './App.css';
 import Snake from './components/snake';
 import Food from './components/food'
 
-function GetRandomPosition() {
-  let min = 0;
-  let maxLeft = 50;
-  let maxTop  = 30;
-  return [
-    Math.floor(Math.random() * (maxLeft - min)) + min, 
-    Math.floor(Math.random() * (maxTop - min)) + min
-  ];
-}
-
 
 class App extends React.Component {
   constructor(props){
@@ -26,7 +16,7 @@ class App extends React.Component {
         [2,2]
       ],
       direction: "right",
-      foodDot: GetRandomPosition(),
+      foodDot: [10,10],
       speed: 150,
       step: 20,
       fieldSize:{
@@ -34,6 +24,18 @@ class App extends React.Component {
         width: 1000
       }
     }
+  }
+
+  GetRandomPosition = () => {
+    let min = 0;
+    let maxLeft = 50;
+    let maxTop  = 30;
+    let x, y;
+    do{
+      x = Math.floor(Math.random() * (maxLeft - min)) + min;
+      y = Math.floor(Math.random() * (maxTop - min)) + min;
+    }while(this.IsOnSnake([x,y]));
+    return[x,y];
   }
 
   componentDidMount(){
@@ -75,6 +77,9 @@ class App extends React.Component {
   }
 
   CheckDirection(newDir){
+    if(!newDir){
+      return false;
+    }
     switch(this.state.direction){
       case 'left':
         if(newDir == 'right') return false;
@@ -97,13 +102,26 @@ class App extends React.Component {
     let head  = snake[snake.length - 1];
     let food  = this.state.foodDot;
     if(head[0] == food[0] && head[1] == food[1]){
-      this.setState({foodDot: GetRandomPosition()});
-
+      this.setState({foodDot: this.GetRandomPosition()});
+      this.snakeIncrease();
     }
   }
 
+  IsOnSnake(position){
+    let result = false;
+    let snake = this.state.snakeDots;
+    snake.forEach(dot => {
+      if(position[0] == dot[0] && position[1] == dot[1]){
+        result = true;
+      }
+    });
+    return result;
+  }
+
   snakeIncrease = () => {
-    
+    var newSnake = this.state.snakeDots;
+    newSnake.unshift([]);
+    this.setState({snakeDots: newSnake});
   }
 
   move = () =>{
@@ -146,6 +164,9 @@ class App extends React.Component {
         break;
       case 40:
           newDir = 'down';
+        break;
+      case 84:
+        this.snakeIncrease();
         break;
     } 
     if(this.CheckDirection(newDir)){
