@@ -18,3 +18,11 @@ body{
   background-color: #2bff00;
   border: 1px solid rgb(53, 53, 53)
 }
+
+.food{
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  background-color: #ff0000;
+  border: 1px solid rgb(53, 53, 53)
+}

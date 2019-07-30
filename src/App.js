@@ -1,11 +1,18 @@
 import React from 'react';
 import './App.css';
-import Snake from './components/snake'
+import Snake from './components/snake';
+import Food from './components/food'
 
-
-const GetRandomPosition = () => {
-  return [10,22];
+function GetRandomPosition() {
+  let min = 0;
+  let maxLeft = 50;
+  let maxTop  = 30;
+  return [
+    Math.floor(Math.random() * (maxLeft - min)) + min, 
+    Math.floor(Math.random() * (maxTop - min)) + min
+  ];
 }
+
 
 class App extends React.Component {
   constructor(props){
@@ -36,6 +43,7 @@ class App extends React.Component {
 
   componentDidUpdate(){
     this.CheckBorders();
+    this.CheckFood();
   }
 
   CheckBorders(){
@@ -46,8 +54,6 @@ class App extends React.Component {
       step * head[0],
       step * head[1]
     ];
-
-
     let teleport = (coord) => {
       snake[snake.length - 1] = coord;
       this.setState({
@@ -67,6 +73,7 @@ class App extends React.Component {
       teleport([head[0], 0]);
     }
   }
+
   CheckDirection(newDir){
     switch(this.state.direction){
       case 'left':
@@ -85,9 +92,23 @@ class App extends React.Component {
     return  true;
   }
 
+  CheckFood(){
+    let snake = this.state.snakeDots;
+    let head  = snake[snake.length - 1];
+    let food  = this.state.foodDot;
+    if(head[0] == food[0] && head[1] == food[1]){
+      this.setState({foodDot: GetRandomPosition()});
+
+    }
+  }
+
+  snakeIncrease = () => {
+    
+  }
+
   move = () =>{
     let snake = this.state.snakeDots;
-    let head  = snake[snake.length - 1]
+    let head  = snake[snake.length - 1];
 
     switch(this.state.direction){
       case "left":
@@ -136,6 +157,7 @@ class App extends React.Component {
     return (
       <div className="game-area" style={this.state.fieldSize}>
         <Snake step={this.state.step} snakeDots={this.state.snakeDots} />
+        <Food position={this.state.foodDot} step={this.state.step} />
       </div>
     );
   }
