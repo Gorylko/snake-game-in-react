@@ -3,12 +3,27 @@ body{
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(78,255,86,1) 53%, rgba(0,212,255,1) 100%);
 }
 
+.game{
+  position: relative;
+  box-shadow: 0 0 30px #000000;
+  margin: 50px auto;
+  width: 1000px;
+  border-radius: 40px 40px 0px 0px;
+}
+
+.panel{
+  position: relative;
+  background-color: rgb(36, 36, 36);
+  height: 100px;
+  width: 1000px;
+  border-radius: 40px 40px 0px 0px;
+  border: 1px solid rgb(53, 53, 53)
+}
+
 .game-area{
   background-color: rgb(53, 53, 53);
   position: relative;
-  margin: 50px auto;
   border: 1px solid #202020;
-  box-shadow: 0 0 30px #000000
 }
 
 .snake-dot{

@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import Snake from './components/snake';
-import Food from './components/food'
+import Food from './components/food';
+import Panel from './components/panel';
 
 
 class App extends React.Component {
@@ -20,7 +21,7 @@ class App extends React.Component {
       speed: 150,
       step: 20,
       fieldSize:{
-        height: 600,
+        height: 400,
         width: 1000
       }
     }
@@ -28,8 +29,8 @@ class App extends React.Component {
 
   GetRandomPosition = () => {
     let min = 0;
-    let maxLeft = 50;
-    let maxTop  = 30;
+    let maxLeft = this.state.fieldSize.width / this.state.step;
+    let maxTop  = this.state.fieldSize.height / this.state.step;
     let x, y;
     do{
       x = Math.floor(Math.random() * (maxLeft - min)) + min;
@@ -176,9 +177,12 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="game-area" style={this.state.fieldSize}>
-        <Snake step={this.state.step} snakeDots={this.state.snakeDots} />
-        <Food position={this.state.foodDot} step={this.state.step} />
+      <div className="game">
+        <Panel />
+        <div className="game-area" style={this.state.fieldSize}>
+          <Snake step={this.state.step} snakeDots={this.state.snakeDots} />
+          <Food position={this.state.foodDot} step={this.state.step} />
+        </div>
       </div>
     );
   }
