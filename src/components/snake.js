@@ -3,7 +3,7 @@ import '../App.css'
 
 export default (props) => {
         return(
-            <div>
+            <div className="snake">
                 {props.snakeDots.map((dot, i) => {
                     const style = {
                         left: `${props.step * dot[0]}px`,

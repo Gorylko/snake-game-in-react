@@ -61,5 +61,14 @@ body{
 
 .score{
   font-family: Comic Sans MS, Comic Sans, cursive;
+  float: right;
+  margin: 35px 40px 5px 30px;
+  font-weight: 1000;
+  font-size: 40px;
+  color: #39ca00;
+}
+
+.snake :last-child{
+  background-color: #008311;
 }
 

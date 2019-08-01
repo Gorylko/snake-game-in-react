@@ -9,13 +9,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      snakeDots: [
-        [0,0],
-        [1,0],
-        [1,1],
-        [1,2],
-        [2,2]
-      ],
+      snakeDots: [[2,2]],
       direction: "right",
       foodDot: [10,10],
       speed: 150,
@@ -23,7 +17,8 @@ class App extends React.Component {
       fieldSize:{
         height: 400,
         width: 1000
-      }
+      },
+      score: 1
     }
   }
 
@@ -105,7 +100,13 @@ class App extends React.Component {
     if(head[0] == food[0] && head[1] == food[1]){
       this.setState({foodDot: this.GetRandomPosition()});
       this.snakeIncrease();
+      this.ScoreIncrement();
     }
+  }
+
+  ScoreIncrement(){
+    let newScore = this.state.score + 1;
+    this.setState({score: newScore});
   }
 
   IsOnSnake(position){
@@ -178,7 +179,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="game">
-        <Panel />
+        <Panel score={this.state.score} />
         <div className="game-area" style={this.state.fieldSize}>
           <Snake step={this.state.step} snakeDots={this.state.snakeDots} />
           <Food position={this.state.foodDot} step={this.state.step} />
