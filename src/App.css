@@ -20,6 +20,16 @@ body{
   border: 1px solid rgb(53, 53, 53)
 }
 
+.panel-text{
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  height: 50px;
+  float: left;
+  line-height: 130px;
+  font-weight: 1000;
+  font-size: 40px;
+  color: #c9002b;
+}
+
 .game-area{
   background-color: rgb(53, 53, 53);
   position: relative;
@@ -41,3 +51,15 @@ body{
   background-color: #ff0000;
   border: 1px solid rgb(53, 53, 53)
 }
+
+.logo{
+  float: left;
+  height: 70px;
+  width: 70px;
+  margin: 25px 10px 15px 30px;
+}
+
+.score{
+  font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
